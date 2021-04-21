@@ -10,13 +10,13 @@ address = (host,port)
 s = socket.socket(socket.AF_INET,socket.SOCK_STREAM) 
 s.connect(address)
 
-stream = s.recv(32768)
+stream = s.recv(4096)
 
 snd = '1\n'
 s.sendall(snd.encode())
 
-stream = s.recv(32768)
-stream += s.recv(32768)
+stream = s.recv(4096)
+stream += s.recv(4096)
 
 output = stream.decode()
 
@@ -46,7 +46,7 @@ snd = '2\n'
 s.sendall(snd.encode())
 
 while True:
-    stream = s.recv(16384)
+    stream = s.recv(4096)
     equation = stream.decode()
     print(equation)
     result = re.findall(r"\W [*\-+ ]",equation)
